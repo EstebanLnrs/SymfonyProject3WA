@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fighter index{% endblock %}
+
+{% block body %}
+    <h1>Fighter index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Pseudonym</th>
+                <th>Age</th>
+                <th>Weight</th>
+                <th>Height</th>
+                <th>Reach</th>
+                <th>Stance</th>
+                <th>Organisation</th>
+                <th>Category</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fighter in fighters %}
+            <tr>
+                <td>{{ fighter.id }}</td>
+                <td>{{ fighter.name }}</td>
+                <td>{{ fighter.surname }}</td>
+                <td>{{ fighter.pseudonym }}</td>
+                <td>{{ fighter.age }}</td>
+                <td>{{ fighter.weight }}</td>
+                <td>{{ fighter.height }}</td>
+                <td>{{ fighter.reach }}</td>
+                <td>{{ fighter.stance }}</td>
+                <td>{{ fighter.organisation.name}}</td>
+                {% for cat in fighter.category %}
+                    <td> {{ cat.name}} </td>
+                {% endfor %}
+                <td>{{ fighter.resume.resume }}</td>
+                <td>
+                    <a href="{{ path('app_fighter_show', {'id': fighter.id}) }}">show</a>
+                    <a href="{{ path('app_fighter_edit', {'id': fighter.id}) }}">edit</a>
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fighter_new') }}">Create new</a>
+{% endblock %}
