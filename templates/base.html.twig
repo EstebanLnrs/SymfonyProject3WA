@@ -10,8 +10,18 @@
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% include "includes/alert.html.twig" %}
         {% endblock %}
     </head>
+    {% block navbar %}
+        {% include "includes/navbar.html.twig" %}
+        {% if app.user %}
+            <div class="mb-3">
+             <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+
+    {% endblock %}
     <body>
         {% block body %}{% endblock %}
     </body>
