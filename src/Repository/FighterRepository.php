@@ -21,6 +21,18 @@ class FighterRepository extends ServiceEntityRepository
         parent::__construct($registry, Fighter::class);
     }
 
+    /**
+     * @param $organisationID
+     * @return mixed
+     */
+    public function fighterByOrganisation($organisationID){
+        return $this->createQueryBuilder("f")
+        ->andWhere('f.organisation = :organisation_id')
+        ->setParameter('organisation_id', $organisationID)
+        ->getQuery()
+        ->getResult();
+    }
+
     //    /**
     //     * @return Fighter[] Returns an array of Fighter objects
     //     */

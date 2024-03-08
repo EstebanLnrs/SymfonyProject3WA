@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+
 use App\Repository\FighterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FighterRepository::class)]
-class Fighter
+class Fighter implements \JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -52,6 +53,22 @@ class Fighter
     public function __construct()
     {
         $this->Category = new ArrayCollection();
+    }
+
+    public function jsonSerialize(){
+        return [
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'pseudonym' => $this->pseudonym,
+            'age' => $this->age,
+            'weight' => $this->weight,
+            'height' => $this->height,
+            'reach' => $this->reach,
+            'stance' => $this->stance,
+            'organisation' => $this->organisation->getName(),
+            'category' => $this->Category->getKeys("fighters"),
+            'resume' => $this->resume->getResume()
+        ];
     }
 
     public function getId(): ?int

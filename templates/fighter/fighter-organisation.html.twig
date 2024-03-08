@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fighters by organisation
+{% endblock %}
+
+{% block body %}
+
+	
+    <a href="{{ path('app_fighter_index') }}" class="btn btn-danger">Back</a>
+	{% for fighter in fighters %}
+		<div class="container bg-white p-3 mt-3">
+            <h1>{{fighter.name}} "{{fighter.pseudonym}}" {{fighter.surname}}</h1>
+			<h1>Organisation : {{fighter.organisation.name}}</h1>
+			{% for cat in fighter.Category %}
+			<h5 class="text-success">Category :
+				{{cat.name}}</h5>
+			{% endfor %}	
+			<a href="{{path('app_fighter_show', {id: fighter.id})}}" class="btn btn-warning">Fighter details</a>
+			
+        </div>
+	{% endfor %}
+
+{% endblock %}

@@ -4,7 +4,15 @@
 
 {% block body %}
     <h1>Fighter index</h1>
-
+    <form class="mt-5" action="{{path("app_fighter_organisation")}}" method="post">
+		<label for="categorie">Search by organisation</label>
+		<select class="form-control" id="organisation" name="organisation_id">
+			{% for orga in organisation %}
+				<option value="{{ orga.id }}">{{ orga.name }}</option>
+			{% endfor %}
+		</select>
+		<button type="submit" class="btn btn-success mt-3">Rechercher</button>
+	</form>
     <table class="table">
         <thead>
             <tr>
